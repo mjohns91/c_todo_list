@@ -1,6 +1,12 @@
+/*
+ * @author Matthew Johnson
+ * Main entry point for the program.
+ */
 #include <stdio.h>
 
+#include "io.h"
+
 int main(void) {
-    printf("Hello, World!\n");
+    load_tasks();
     return 0;
 }
