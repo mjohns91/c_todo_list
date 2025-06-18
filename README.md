@@ -66,7 +66,8 @@ Available commands:
 
 Examples:
 - `./todo add "Buy groceries"`
-- `./todo list ./todo done 1`
+- `./todo list`
+- `./todo done 1`
 - `./todo delete 2`
 
 ***
