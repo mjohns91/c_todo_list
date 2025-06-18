@@ -10,10 +10,19 @@
 
 Task tasks[MAX_TASKS];
 int task_count = 0;
-char cwd[1024];
 
 /**
- * Loads in tasks from a task text file, if available.
+ * Loads tasks from a text file into memory.
+ * Each line in the file should represent one task and must be formatted
+ * as a comma-separated value (CSV) containing task ID, task description,
+ * and completion status.
+ *
+ * If the file cannot be opened, an error message is printed, and no tasks are loaded.
+ * The function reads tasks until the maximum number of tasks (`MAX_TASKS`) is reached
+ * or the end of the file is encountered.
+ *
+ * Tasks are stored in the `tasks` array, and the total number of tasks is updated
+ * in the `task_count` variable.
  */
 void load_tasks() {
     FILE *f = fopen(FILE_NAME, "r");
@@ -40,14 +49,31 @@ void load_tasks() {
             strncpy(tasks[task_count].text, text, TASK_LEN - 1);
             tasks[task_count].text[TASK_LEN - 1] = '\0';  // Ensure null termination
             tasks[task_count].done = atoi(done_str);
-            // Print the line for testing
-            printf("%d,%s,%d\n", tasks[task_count].id, tasks[task_count].text, tasks[task_count].done);
             task_count++;
         }
     }
     fclose(f);
 }
 
+/**
+ * Saves all tasks to a text file for persistent storage.
+ * Each task is written as a comma-separated line containing:
+ * task ID, task description, and completion status.
+ * If the file cannot be opened, an error message is displayed.
+ */
 void save_tasks() {
+    FILE *f = fopen(FILE_NAME, "w");
+    if (f == NULL) {
+        printf("Error: Could not open file for writing\n");
+        return;
+    }
 
+    for (int i = 0; i < task_count; i++) {
+        fprintf(f, "%d,%s,%d\n",
+            tasks[i].id,
+            tasks[i].text,
+            tasks[i].done);
+    }
+
+    fclose(f);
 }
