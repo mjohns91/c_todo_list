@@ -86,8 +86,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Author
 
 Matthew Johnson
-
-## Acknowledgments
-
-- Thanks to all contributors who help improve this project
-- Inspired by traditional Unix command-line tools
